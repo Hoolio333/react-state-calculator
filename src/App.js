@@ -7,6 +7,8 @@ function App() {
   const [result, setResult] = useState("0");
   const [symbol, setSymbol] = useState("+");
   const [storedResult, setStoredResult] = useState("");
+  const [recallLeft, setRecallLeft] = useState("");
+  const [recallRight, setRecallRight] = useState("");
 
   const newDigitToLeftCount = (digit) => {
     if (leftNumber === "0") {
@@ -55,6 +57,9 @@ function App() {
           <button onClick={() => newDigitToLeftCount("9")}>9</button>
           <button onClick={() => newDigitToLeftCount("0")}>0</button>
           <button onClick={() => setLeftNumber("0")}>Clear</button>
+          <button onClick={() => setLeftNumber(storedResult)}>
+            Recall Left
+          </button>
         </div>
       </div>
 
@@ -82,6 +87,9 @@ function App() {
           <button onClick={() => newDigitToRightCount("9")}>9</button>
           <button onClick={() => newDigitToRightCount("0")}>0</button>
           <button onClick={() => setRightNumber("")}>Clear</button>
+          <button onClick={() => setRightNumber(storedResult)}>
+            Recall Right
+          </button>
         </div>
       </div>
       <div className="panel answer">
