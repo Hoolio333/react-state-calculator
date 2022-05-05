@@ -2,46 +2,47 @@ import "./App.css";
 import { useState } from "react";
 
 function App() {
-  const [leftCount, setLeftCount] = useState("0");
-  const [rightCount, setRightCount] = useState("0");
-  const [totalCount, setTotalCount] = useState("0");
+  const [leftNumber, setLeftNumber] = useState("0");
+  const [rightNumber, setRightNumber] = useState("0");
+  const [result, setResult] = useState("0");
   const [symbol, setSymbol] = useState("+");
+  const [storedResult, setStoredResult] = useState("");
 
   const newDigitToLeftCount = (digit) => {
-    if (leftCount === "0") {
-      setLeftCount(digit);
+    if (leftNumber === "0") {
+      setLeftNumber(digit);
     } else {
-      setLeftCount(leftCount + digit);
+      setLeftNumber(leftNumber + digit);
     }
   };
 
   const newDigitToRightCount = (digit) => {
-    if (rightCount === "0") {
-      setRightCount(digit);
+    if (rightNumber === "0") {
+      setRightNumber(digit);
     } else {
-      setRightCount(rightCount + digit);
+      setRightNumber(rightNumber + digit);
     }
   };
 
   const onClickCalculate = () => {
     if (symbol === "+") {
-      setTotalCount(Number(leftCount) + Number(rightCount));
+      setResult(Number(leftNumber) + Number(rightNumber));
     }
     if (symbol === "-") {
-      setTotalCount(Number(leftCount) - Number(rightCount));
+      setResult(Number(leftNumber) - Number(rightNumber));
     }
     if (symbol === "*") {
-      setTotalCount(Number(leftCount) * Number(rightCount));
+      setResult(Number(leftNumber) * Number(rightNumber));
     }
     if (symbol === "÷") {
-      setTotalCount(Number(leftCount) / Number(rightCount));
+      setResult(Number(leftNumber) / Number(rightNumber));
     }
   };
 
   return (
     <div className="calculator">
       <div className="panel">
-        <p>{leftCount}</p>
+        <p>{leftNumber}</p>
         <div className="numbers">
           <button onClick={() => newDigitToLeftCount("1")}>1</button>
           <button onClick={() => newDigitToLeftCount("2")}>2</button>
@@ -53,7 +54,7 @@ function App() {
           <button onClick={() => newDigitToLeftCount("8")}>8</button>
           <button onClick={() => newDigitToLeftCount("9")}>9</button>
           <button onClick={() => newDigitToLeftCount("0")}>0</button>
-          <button onClick={() => setLeftCount("0")}>Clear</button>
+          <button onClick={() => setLeftNumber("0")}>Clear</button>
         </div>
       </div>
 
@@ -68,7 +69,7 @@ function App() {
       </div>
 
       <div className="panel">
-        <p>{rightCount}</p>
+        <p>{rightNumber}</p>
         <div className="numbers">
           <button onClick={() => newDigitToRightCount("1")}>1</button>
           <button onClick={() => newDigitToRightCount("2")}>2</button>
@@ -80,13 +81,17 @@ function App() {
           <button onClick={() => newDigitToRightCount("8")}>8</button>
           <button onClick={() => newDigitToRightCount("9")}>9</button>
           <button onClick={() => newDigitToRightCount("0")}>0</button>
-          <button onClick={() => setRightCount("")}>Clear</button>
+          <button onClick={() => setRightNumber("")}>Clear</button>
         </div>
       </div>
       <div className="panel answer">
-        <p>{totalCount}</p>
+        <p>{result}</p>
         <div>
           <button onClick={onClickCalculate}>=</button>
+          <div className="Store">
+            <p>{storedResult} &nbsp;</p>
+            <button onClick={() => setStoredResult(result)}>Store</button>
+          </div>
         </div>
       </div>
     </div>
